@@ -12,11 +12,17 @@ const Stack = createNativeStackNavigator<AuthStackParamList>();
 
 /**
  * Authentication stack navigator.
- * Handles Login and Register screens with headers hidden.
+ * Handles Login and Register screens with headers hidden and no transition animation.
  */
 const AuthStack: React.FC = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        animation: "none",            
+        gestureEnabled: false,        
+      }}
+    >
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Register" component={RegisterScreen} />
     </Stack.Navigator>

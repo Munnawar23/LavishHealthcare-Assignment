@@ -64,7 +64,7 @@ const LoginScreen: React.FC = () => {
       >
         <View className="p-6">
           <Text className="text-4xl text-center font-poppins-bold text-primary mb-12">
-            Lavish FC
+            Login
           </Text>
 
           <View className="mb-5">

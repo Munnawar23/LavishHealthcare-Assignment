@@ -17,57 +17,56 @@ const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 /**
  * Bottom tab navigator with theme-aware styling and icons.
+ * Animations disabled for instant tab switching.
  */
 const BottomTabNavigator: React.FC = () => {
   const { colors } = useTheme();
 
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
-        headerShown: true,
-        headerStyle: { backgroundColor: colors.card },
-        headerTintColor: colors.text,
-        headerTitleStyle: { fontFamily: "Poppins-SemiBold" },
-        headerShadowVisible: false,
-
-        tabBarActiveTintColor: colors.primary,
-        tabBarInactiveTintColor: colors.subtext,
-        tabBarStyle: {
-          height: 80,
-          paddingBottom: 0,
-          paddingTop: 5,
-          backgroundColor: colors.card,
-          borderTopWidth: 1,
-          borderTopColor: colors.border,
-        },
-        tabBarLabelStyle: {
-          fontFamily: "Poppins-SemiBold",
-          fontSize: 12,
-        },
-        tabBarIcon: ({ focused, color }) => {
-          let iconName: keyof typeof Ionicons.glyphMap;
-          switch (route.name) {
+      screenOptions={({ route }) => {
+        const getIconName = (routeName: string, focused: boolean) => {
+          switch (routeName) {
             case "HomeTab":
-              iconName = focused ? "home" : "home-outline";
-              break;
+              return focused ? "home" : "home-outline";
             case "CreateTeamTab":
-              iconName = focused ? "add-circle" : "add-circle-outline";
-              break;
+              return focused ? "add-circle" : "add-circle-outline";
             case "MyMatchesTab":
-              iconName = focused ? "trophy" : "trophy-outline";
-              break;
+              return focused ? "trophy" : "trophy-outline";
             default:
-              iconName = "alert-circle";
+              return "alert-circle";
           }
-          return <Ionicons name={iconName} size={26} color={color} />;
-        },
-      })}
+        };
+
+        return {
+          headerShown: true,
+          headerStyle: { backgroundColor: colors.card },
+          headerTintColor: colors.text,
+          headerTitleStyle: { fontFamily: "Poppins-SemiBold" },
+          headerShadowVisible: false,
+
+          tabBarActiveTintColor: colors.primary,
+          tabBarInactiveTintColor: colors.subtext,
+          tabBarStyle: {
+            height: 80,
+            paddingBottom: 0,
+            paddingTop: 5,
+            backgroundColor: colors.card,
+            borderTopWidth: 1,
+            borderTopColor: colors.border,
+          },
+          tabBarLabelStyle: {
+            fontFamily: "Poppins-SemiBold",
+            fontSize: 12,
+          },
+          tabBarIcon: ({ focused, color }) => (
+            <Ionicons name={getIconName(route.name, focused)} size={26} color={color} />
+          ),
+          animationEnabled: false,
+        };
+      }}
     >
-      <Tab.Screen
-        name="HomeTab"
-        component={HomeScreen}
-        options={{ title: "Home" }}
-      />
+      <Tab.Screen name="HomeTab" component={HomeScreen} options={{ title: "Home" }} />
       <Tab.Screen
         name="CreateTeamTab"
         component={CreateTeamScreen}

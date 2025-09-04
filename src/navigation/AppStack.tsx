@@ -9,7 +9,7 @@ import TeamPreviewScreen from "@/screens/TeamPreviewScreen";
 import CreateTeamScreen from "@/screens/CreateTeamScreen";
 
 export type AppStackParamList = {
-  Main: NavigatorScreenParams<BottomTabParamList>; // Nested bottom tabs
+  Main: NavigatorScreenParams<BottomTabParamList>;
   MatchDetails: { matchId: string };
   TeamSelection: { matchId: string; isEdit?: boolean };
   TeamPreview: { matchId: string };
@@ -18,10 +18,6 @@ export type AppStackParamList = {
 
 const Stack = createNativeStackNavigator<AppStackParamList>();
 
-/**
- * Main navigator for authenticated users.
- * Contains BottomTabNavigator and screens that appear over the tabs.
- */
 const AppStack: React.FC = () => {
   const { colors } = useTheme();
 
@@ -31,7 +27,10 @@ const AppStack: React.FC = () => {
         headerStyle: { backgroundColor: colors.card },
         headerTintColor: colors.text,
         headerTitleStyle: { fontFamily: "Poppins-SemiBold" },
-        headerBackTitle: "", // Hides back button text
+        headerBackTitle: "",
+        animation: "none", 
+        gestureEnabled: false, 
+        contentStyle: { backgroundColor: colors.background }, 
       }}
     >
       <Stack.Screen
