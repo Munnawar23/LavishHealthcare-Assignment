@@ -16,7 +16,6 @@
       "supportsTablet": true
     },
     "android": {
-      
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -27,6 +26,11 @@
     "web": {
       "bundler": "metro",
       "favicon": "./src/assets/images/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "de97a3b6-89cd-48a3-901e-9b5c37f4dcf6"
+      }
     }
   }
 }
